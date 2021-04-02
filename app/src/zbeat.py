@@ -40,10 +40,14 @@ def publish_heartrate(beat, bpm, avg_bpm):
     heart_rate.labels('bpm').set(bpm)
     heart_rate.labels('avg_bpm').set(avg_bpm)
 
+def get_temp():
+    temp = max30105.get_temperature()
+    return temp
+
 if __name__ == '__main__':
     prometheus_client.start_http_server(9999)
 
 while True:
     hr.on_beat(publish_heartrate, average_over=4)
-    temperature.labels('temp').set(max30105.get_temperature())
+    temperature.labels('temp').set(get_temp())
     time.sleep(UPDATE_PERIOD)
