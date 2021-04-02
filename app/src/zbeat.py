@@ -34,8 +34,8 @@ beat_detected = prometheus_client.Gauge('beat_detected',
 
 
 def publish_heartrate(beat, bpm, avg_bpm):
-    heart_rate.labels('beat').set(beat)
-    beat_detected.labels('bpm').set(bpm)
+    beat_detected.labels('beat').set(beat)
+    heart_rate.labels('bpm').set(bpm)
     heart_rate.labels('avg_bpm').set(avg_bpm)
 
 
