@@ -28,9 +28,11 @@ heart_rate = prometheus_client.Gauge('heart_rate_bpm',
                                      'current heart rate bpm',
                                      ['bpm'])
 beat_detected = prometheus_client.Gauge('beat_detected',
-                                     'current heart rate bpm',
+                                     'heart beat detected',
                                      ['beat'])
-
+temperature = prometheus_client.Gauge('temperature',
+                                     'curent temperature',
+                                     ['temp'])
 
 
 def publish_heartrate(beat, bpm, avg_bpm):
@@ -38,10 +40,10 @@ def publish_heartrate(beat, bpm, avg_bpm):
     heart_rate.labels('bpm').set(bpm)
     heart_rate.labels('avg_bpm').set(avg_bpm)
 
-
 if __name__ == '__main__':
     prometheus_client.start_http_server(9999)
 
 while True:
     hr.on_beat(publish_heartrate, average_over=4)
+    temperature.labels('temp').set(max30105.get_temperature())
     time.sleep(UPDATE_PERIOD)
