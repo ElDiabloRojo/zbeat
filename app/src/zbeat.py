@@ -18,8 +18,6 @@ max30105.set_slot_mode(2, 'ir')
 max30105.set_slot_mode(3, 'off')
 max30105.set_slot_mode(4, 'off')
 
-UPDATE_PERIOD = 300
-
 hr = HeartRate(max30105)
 
 # Metric Declarations
@@ -47,4 +45,3 @@ while True:
     hr.on_beat(publish_heartrate, average_over=4)
     temp = max30105.get_temperature()
     temperature.labels('temp').set(temp)
-    time.sleep(UPDATE_PERIOD)
