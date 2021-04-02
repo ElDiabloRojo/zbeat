@@ -3,8 +3,7 @@ prom vitals exporter
 
 # Project Contents
 
-* [Examples](./examples/README.md)
-* [ZBeat](./src/README.md)
+* [ZBeat](./app/README.md)
 * [Grafana](./grafana/README.md)
 * [Prometheus](./promtheus/README.md)
 
