@@ -1,6 +1,10 @@
 # zbeat
 prom vitals exporter
 
+# Project Contents
+
+* [Examples](./examples/README.md)
+
 # Reference Projects
 
 MAX30105 python library: https://github.com/pimoroni/max30105-python
