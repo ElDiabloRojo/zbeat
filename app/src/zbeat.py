@@ -4,6 +4,8 @@ import prometheus_client
 import time
 from max30105 import MAX30105, HeartRate
 
+# Max30105 Setup
+
 max30105 = MAX30105()
 max30105.setup(leds_enable=2)
 
@@ -19,14 +21,21 @@ max30105.set_slot_mode(4, 'off')
 UPDATE_PERIOD = 300
 
 hr = HeartRate(max30105)
+
+# Metric Declarations
+
 heart_rate = prometheus_client.Gauge('heart_rate_bpm',
-                                     'Depth of water in water tank. Full = 2.7m',
-                                     ['location'])
+                                     'current heart rate bpm',
+                                     ['bpm'])
+beat_detected = prometheus_client.Gauge('beat_detected',
+                                     'current heart rate bpm',
+                                     ['beat'])
+
 
 
 def publish_heartrate(beat, bpm, avg_bpm):
     heart_rate.labels('beat').set(beat)
-    heart_rate.labels('bpm').set(bpm)
+    beat_detected.labels('bpm').set(bpm)
     heart_rate.labels('avg_bpm').set(avg_bpm)
 
 
